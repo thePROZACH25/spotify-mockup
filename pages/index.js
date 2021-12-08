@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 import Center from '../components/Center'
 import Sidebar from '../components/Sidebar'
@@ -5,10 +6,10 @@ import Sidebar from '../components/Sidebar'
 export default function Home() {
   return (
     <div className='bg-black h-screen overflow-hidden'>
-      {/* <Head>
+      <Head>
         <title>Spotify-Mockup-ZL</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head> */}
+      </Head>
 
       <main className='flex'>
         <Sidebar />
@@ -20,4 +21,14 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+
+  return{
+    props: {
+      session
+    }
+  }
 }
